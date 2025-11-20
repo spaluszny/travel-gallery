@@ -32,15 +32,13 @@ export default function RootLayout({
     <html lang="en">
 
       <body className={`${geistSans.variable} ${geistMono.variable} ${interSans.variable} antialiased`}>
-       <div className="flex">
           {/* Sidebar */}
-          <SideBar />
+          <div className="hidden md:block"><SideBar /></div>
           
           {/* Main content area */}
-          <main className="ml-[400px] flex-1 min-h-screen">
+          <main className="ml-0 md:ml-[400px] min-h-screen">
             {children}
           </main>
-        </div>
       </body>
     </html>
   );
