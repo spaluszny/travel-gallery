@@ -14,7 +14,7 @@ export default function SideBar() {
                     <h3 className="-mt-2">Travel Photography</h3>
                     <p className="pt-5">This is a collection of photographs, I’ve attained while traveling the world. Some are taken by me. Some are taken by friends I’ve met along the way. Hope you enjoy :)</p>
                 </div>
-                {/* <div className="pt-10 text-lg font-semibold uppercase"><Link href="/">Recent</Link></div> */}
+                <div className="pt-10 text-lg font-semibold uppercase"><Link href="/">Recent</Link></div>
                 <div className="pt-10">
                     <h4 className="font-bold uppercase">The Gallery</h4>
                     <ul className="flex flex-col gap-1 text-md">
