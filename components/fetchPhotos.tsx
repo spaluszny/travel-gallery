@@ -12,10 +12,11 @@ export default async function AlbumFetcher({ linkURL }: { linkURL: string }) {
     ? response.data 
     : JSON.stringify(response.data)
   const matches = [...responseText.matchAll(regex)]
-  const urls = matches.map(match => match[1])
+  const uniqueMatch = [...new Set(matches)]
+  const urls = uniqueMatch.map(match => match[1]).slice(0,-2)
   
   return (
-  <div className="columns-1 md:columns-2 xl:columns-3 gap-4">
+  <div className="columns-1 md:columns-2 2xl:columns-3 gap-4">
   {urls.map((url, index) => (
     <div key={index} className="mb-4 break-inside-avoid">
       <Image

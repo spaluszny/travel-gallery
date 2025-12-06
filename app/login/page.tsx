@@ -1,42 +1,30 @@
 //'use client'
+import oauth2Client from "@/utils/google-auth"
+import Link from "next/link"
 
-import googleAuth from "@/components/googleAuth"
 
-export default async function Home() {
-
-    const data = await googleAuth()
-    const url = data.config.url
+export default function Home() {
+    const SCOPE = ("https://www.googleapis.com/auth/photospicker.mediaitems.readonly")
+    const authorziationURL = oauth2Client.generateAuthUrl({
+        access_type: "offline",
+        scope: SCOPE
+    })
 
     return (
-        <div className="p-8">
-            <h1 className="text-xl pb-1 text-gray-600">Google Photos Picker API Example</h1>
-            {/* <button onClick={handleGoogleLogin}>
-                Sign in with Google
-            </button> */}
-            <div className="flex p-8 pt-12 pb-12 border rounded-xl border-gray-200">
-                <div className="flex-1 min-w-96  mr-12">
-                    <span id="naming_device" >
-                        <h1 className="text-2xl font-medium mb-4">Creating device...</h1>
-                    </span>
-                    <span id="name_device">
-                        <h1 className="text-2xl font-medium mb-4">Connect to Google Photos</h1>
 
-                        <a className="p-4 px-8 border border-gray-400 rounded-xl inline-block hover:bg-blue-50 cursor-pointer hover:border-blue-400" id="google_photos_button" href="/auth/google">
-                            <div className="inline-block mr-4">
-                                <img src="photos_36dp.png" alt="Google Photos Logo" className="w-100" />
-                            </div>
-                            <div className="inline-block">
-                                <h2 className='text-lg font-semibold'>Google Photos</h2>
-                                <p className="text-md">Pick images and videos from your library</p>
-                            </div>
-                        </a>
+        <div className="p-10 text-center">
+            <p className="text-2xl font-bold">Welcome to My Super Secret Login Page</p>
+            <p className="font-bold">NOW SCRAM...</p>
+            <p className="font-bold">Unless you are Sarah </p>
+            <p className="font">If you&apos;re Sarah then, </p>
+            <p>Heyyyyyy girl🥰. You look extra cute today ;)</p>
 
-                    </span>
-
-                </div>
-
-            </div>
-
+            <Link href={authorziationURL}>
+                <button className="px-3 py-2 mt-5 bg-black text-white rounded-md w-1/4 cursor-pointer">Login To Google</button>
+            </Link>
         </div>
     )
 }
+
+//https://www.googleapis.com/auth/photospicker.mediaitems.readonly
+//https://www.googleapis.com/auth/photoslibrary.readonly
