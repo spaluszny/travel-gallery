@@ -3,6 +3,7 @@
 import { cookies } from "next/headers"
 // import { google } from "googleapis"
 import PhotoPicker from "@/components/photoPicker"
+import Link from "next/link"
 
 export default async function Home() {
     const cookieStore = cookies()
@@ -11,15 +12,17 @@ export default async function Home() {
     if (!accessToken) {
     return (
       <div className="p-10">
-        <h1>Not logged in</h1>
-        <p>Please log in first</p>
+        <h2>Not logged in</h2>
+        <h3>Please log in first</h3>
+        <button><Link href="/login" /></button>
       </div>
     )
   }
 
     return (
         <div className="p-10">
-            <h1>You are Logged In</h1>
+            <h2>Welcome, Sarah
+            </h2>
             <p>Select the photos you want to add</p>
             <PhotoPicker accessToken={accessToken}
                 apiKey={process.env.API_KEY || ''} />

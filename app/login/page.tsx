@@ -21,9 +21,7 @@ export default function Home() {
             <p>Heyyyyyy girl🥰. You look extra cute today ;)</p>
 
             <Link href={authorziationURL}>
-
-                <button className="px-3 py-2 mt-5 bg-black text-white rounded-md w-1/4 cursor-pointer">Login To Google</button>
-
+                <button className="">Login To Google</button>
             </Link>
         </div>
     )

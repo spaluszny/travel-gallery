@@ -26,15 +26,21 @@ export async function POST() {
       console.error('Session creation failed:', error)
       return NextResponse.json({ error: 'Failed to create session', details: error }, { status: response.status })
     }
+  
 
     const data = await response.json()
     console.log('Session created successfully:', data)
+    //const pickerUri = data.pickerUri + '/autoclose';
+    //return pickerUri;
     return NextResponse.json(data)
+
   } catch (error) {
     console.error('Error creating session:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
+
+//From google api website
 
 
 // Assuming you have an authenticated client or a way to make authenticated API calls.

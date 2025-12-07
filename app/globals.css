@@ -40,3 +40,17 @@ h4{
   font-size: 24px;
   font-weight: 600;
 }
+
+
+.btn-primary{
+  padding: .5rem .75rem;
+  margin-top: 5px;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+}
+
+.btn-primary:hover{
+  cursor: pointer;
+  opacity: 80%;
+}
