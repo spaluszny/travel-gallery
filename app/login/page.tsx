@@ -21,7 +21,7 @@ export default function Home() {
             <p>Heyyyyyy girl🥰. You look extra cute today ;)</p>
 
             <Link href={authorziationURL}>
-                <button className="">Login To Google</button>
+                <button className="btn-primary">Login To Google</button>
             </Link>
         </div>
     )

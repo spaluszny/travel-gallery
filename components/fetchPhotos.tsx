@@ -14,6 +14,7 @@ export default async function AlbumFetcher({ linkURL }: { linkURL: string }) {
   const matches = [...responseText.matchAll(regex)]
   const uniqueMatch = [...new Set(matches)]
   const urls = uniqueMatch.map(match => match[1]).slice(0,-2)
+  console.log(urls)
   
   return (
   <div className="columns-1 md:columns-2 2xl:columns-3 gap-4">
