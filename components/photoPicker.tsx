@@ -1,19 +1,93 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @next/next/no-img-element */
 "use client"
 
 import { useState } from 'react'
-import Image from 'next/image'
 
-interface PhotoPickerProps {
-    accessToken: string
-    apiKey: string
+interface PhotoMetadata {
+    continent?: string
+    country?: string
+    state?: string
+    description?: string
+    takenBy?: string
 }
 
-export default function PhotoPicker({ accessToken, apiKey }: PhotoPickerProps) {
+export default function PhotoPicker() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [selectedPhotos, setSelectedPhotos] = useState<any[]>([])
     const [loading, setLoading] = useState(false)
     const [sessionId, setSessionId] = useState<string | null>(null)
     const [polling, setPolling] = useState(false)
+    const [photoMetadata, setPhotoMetadata] = useState<Record<string, PhotoMetadata>>({})
     //const [sessionData, setSessionData] = useState()
+
+    //const photoMetadata = 
+    const updateMetadata = (photoId: string, field: string, value: string) => {
+        setPhotoMetadata((prev) => ({
+            ...prev,
+            [photoId]: { ...prev[photoId], [field]: value }
+        }))
+    }
+
+    const uploadPhotos = async () => {
+        setLoading(true) // You'll need a loading state
+
+        try {
+            // Loop through each selected photo
+            for (const photo of selectedPhotos) {
+
+                const metadata = photoMetadata[photo.id] || {}
+
+                // Call the upload API
+                const response = await fetch('/api/upload-to-s3', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        baseUrl: photo.mediaFile.baseUrl,
+                        filename: photo.mediaFile.filename,
+                        width: photo.mediaFile.mediaFileMetadata.width,
+                        height: photo.mediaFile.mediaFileMetadata.height,
+                        googlePhotoId: photo.id,
+                        photoDate: photo.createTime,
+                        cameraMake: photo.mediaFile.mediaFileMetadata.cameraMake,
+                        cameraModel: photo.mediaFile.mediaFileMetadata.cameraModel,
+                        continent: metadata.continent || null,
+                        country: metadata.country || null,
+                        state: metadata.state || null,
+                        description: metadata.description || null,
+                        takenBy: metadata.takenBy || null,
+                    })
+                })
+
+                if (!response.ok) {
+                    const error = await response.json()
+                    throw new Error(`Failed to upload ${photo.mediaFile.filename}: ${error.error}`)
+                }
+
+                const data = await response.json()
+                console.log('Uploaded:', data)
+            }
+
+            alert('All photos uploaded successfully!')
+
+            // Clean up
+            setSelectedPhotos([])
+            setPhotoMetadata({})
+            if (sessionId) {
+                await deleteSession()
+            }
+
+
+        } catch (error) {
+            console.error('Upload error:', error)
+            alert('Upload failed: ' + (error instanceof Error ? error.message : 'Unknown error'))
+
+        } finally {
+            setLoading(false)
+        }
+    }
 
     const fetchSelectedPhotos = async (sessionId: string) => {
         try {
@@ -111,25 +185,25 @@ export default function PhotoPicker({ accessToken, apiKey }: PhotoPickerProps) {
 
     return (
         <div>
-            <button
-                className="disabled:opacity-50 btn-primary"
-                disabled={loading}
-                onClick={openPicker}
-            >
-                {loading ? 'Opening Picker...' : 'Add Photos'}
-            </button>
-
-            {sessionId && (
-                <p className="mt-2 text-sm text-gray-600">
-                    Session ID: {sessionId}
-                </p>
-            )}
-            <button className="disabled:opacity-50 btn-primary"
-                disabled={!sessionId}
-                onClick={deleteSession}
-            >
-                Delete Selection
-            </button>
+            <div className='flex gap-5 pt-5'>
+                <button
+                    className="disabled:opacity-50 btn-primary"
+                    disabled={loading || sessionId != null}
+                    onClick={openPicker}
+                >
+                    {loading ? 'Opening Picker...' : 'Add Photos'}
+                </button>
+                <button className="disabled:hidden btn-primary"
+                    disabled={!sessionId}
+                    onClick={deleteSession}
+                >
+                    Delete Selection
+                </button>
+                <button className='disabled:hidden btn-primary'
+                    disabled={!sessionId}
+                    onClick={uploadPhotos}
+                >Upload</button>
+            </div>
             {selectedPhotos.map((photo) => {
                 const { width, height } = photo.mediaFile.mediaFileMetadata
                 const imageUrl = `${photo.mediaFile.baseUrl}=w${width}-h${height}`
@@ -142,6 +216,44 @@ export default function PhotoPicker({ accessToken, apiKey }: PhotoPickerProps) {
                             className="w-full h-auto"
                         />
                         {/* <p className="text-sm">{photo.mediaFile.filename}</p> */}
+                        <input
+                            type="text"
+                            placeholder="Continent"
+                            value={photoMetadata[photo.id]?.continent || ''}
+                            onChange={(e) => updateMetadata(photo.id, 'continent', e.target.value)}
+                            className="border p-2 mb-2 w-full"
+                            required
+                        />
+                        <input
+                            type="text"
+                            placeholder="Country"
+                            value={photoMetadata[photo.id]?.country || ''}
+                            onChange={(e) => updateMetadata(photo.id, 'country', e.target.value)}
+                            className="border p-2 mb-2 w-full"
+                        />
+                        <input
+                            type="text"
+                            placeholder="State"
+                            value={photoMetadata[photo.id]?.state || ''}
+                            onChange={(e) => updateMetadata(photo.id, 'state', e.target.value)}
+                            className="border p-2 mb-2 w-full"
+                        />
+                        <input
+                            type="text"
+                            placeholder="description"
+                            value={photoMetadata[photo.id]?.description || ''}
+                            onChange={(e) => updateMetadata(photo.id, 'description', e.target.value)}
+                            className="border p-2 mb-2 w-full"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Taken By"
+                            value={photoMetadata[photo.id]?.takenBy || ''}
+                            onChange={(e) => updateMetadata(photo.id, 'takenBy', e.target.value)}
+                            className="border p-2 mb-2 w-full"
+                        />
+
+
                     </div>
                 )
             })}
