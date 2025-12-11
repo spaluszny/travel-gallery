@@ -1,6 +1,7 @@
 //import Image from "next/image";
 import SideBar from "@/components/sidebar";
 import AlbumFetcher from "@/components/fetchPhotos";
+import DatabasePhotos from "@/components/databasePhotos";
 export default function Home() {
 
   return (
@@ -12,7 +13,7 @@ export default function Home() {
       {/* <SideBar /> */}
       <h2>RECENT</h2>
       <p className="sm:w-3/5 pb-5">Photos from my most recent adventure. I had the amazing opportunity to complete the Manaslu Circuit in Nepal. </p>
-      <AlbumFetcher linkURL="https://photos.app.goo.gl/ozEjjzZKSzKAqvoN7" />
+      <DatabasePhotos limit={10} />˝
     </div>
     </div>
   );

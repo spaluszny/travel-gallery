@@ -6,7 +6,7 @@ import { Icons } from "./icons"
 export default function SideBar() {
     return (
 
-        <div className="h-screen sm:w-100 bg-[#F5F5F5] p-10 sm:fixed">
+        <div className="h-screen md:w-100 bg-[#F5F5F5] p-10 md:fixed">
             <div className="">
 
                 <div>

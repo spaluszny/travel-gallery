@@ -21,6 +21,14 @@ export default function PhotoPicker() {
     const [photoMetadata, setPhotoMetadata] = useState<Record<string, PhotoMetadata>>({})
     //const [sessionData, setSessionData] = useState()
 
+    const options = [
+        { key: "south-america", value: "South America" },
+        { key: "north-america", value: "North America" },
+        { key: "asia", value: "Aisa" },
+        { key: "africa", value: "Africa" },
+        { key: "europe", value: "Europe" },
+        { key: "oceania", value: "Oceania" },
+    ]
     //const photoMetadata = 
     const updateMetadata = (photoId: string, field: string, value: string) => {
         setPhotoMetadata((prev) => ({
@@ -199,64 +207,76 @@ export default function PhotoPicker() {
                 >
                     Delete Selection
                 </button>
-                <button className='disabled:hidden btn-primary'
-                    disabled={!sessionId}
-                    onClick={uploadPhotos}
-                >Upload</button>
+
             </div>
             {selectedPhotos.map((photo) => {
                 const { width, height } = photo.mediaFile.mediaFileMetadata
                 const imageUrl = `${photo.mediaFile.baseUrl}=w${width}-h${height}`
 
                 return (
-                    <div key={photo.id} className="mb-4 break-inside-avoid">
+                    <div key={photo.id} className="mb-4 break-inside-avoid pt-5 w-150">
                         <img
                             src={`/api/proxy-image?url=${encodeURIComponent(imageUrl)}`}
                             alt={photo.mediaFile.filename}
                             className="w-full h-auto"
                         />
                         {/* <p className="text-sm">{photo.mediaFile.filename}</p> */}
-                        <input
-                            type="text"
-                            placeholder="Continent"
-                            value={photoMetadata[photo.id]?.continent || ''}
-                            onChange={(e) => updateMetadata(photo.id, 'continent', e.target.value)}
-                            className="border p-2 mb-2 w-full"
-                            required
-                        />
-                        <input
-                            type="text"
-                            placeholder="Country"
-                            value={photoMetadata[photo.id]?.country || ''}
-                            onChange={(e) => updateMetadata(photo.id, 'country', e.target.value)}
-                            className="border p-2 mb-2 w-full"
-                        />
-                        <input
-                            type="text"
-                            placeholder="State"
-                            value={photoMetadata[photo.id]?.state || ''}
-                            onChange={(e) => updateMetadata(photo.id, 'state', e.target.value)}
-                            className="border p-2 mb-2 w-full"
-                        />
-                        <input
-                            type="text"
-                            placeholder="description"
-                            value={photoMetadata[photo.id]?.description || ''}
-                            onChange={(e) => updateMetadata(photo.id, 'description', e.target.value)}
-                            className="border p-2 mb-2 w-full"
-                        />
-                        <input
-                            type="text"
-                            placeholder="Taken By"
-                            value={photoMetadata[photo.id]?.takenBy || ''}
-                            onChange={(e) => updateMetadata(photo.id, 'takenBy', e.target.value)}
-                            className="border p-2 mb-2 w-full"
-                        />
-
+                        <div className='flex flex-col pt-5 gap-5'>
+                            {/* <input
+                                type="text"
+                                placeholder="Continent"
+                                value={photoMetadata[photo.id]?.continent || ''}
+                                onChange={(e) => updateMetadata(photo.id, 'continent', e.target.value)}
+                                className="border p-2 mb-2 w-full"
+                                required
+                            /> */}
+                            <select id="options" value={photoMetadata[photo.id]?.continent || ''} onChange={(e) => updateMetadata(photo.id, 'continent', e.target.value)}>
+                                <option value="">--Continent--</option>
+                                <option value="Asia">Asia</option>
+                                <option value="Africa">Africa</option>
+                                <option value="Europe">Europe</option>
+                                <option value="North America">North America</option>
+                                <option value="South America">South America</option>
+                                <option value="Oceania">Oceania</option>
+                            </select>
+                            <input
+                                type="text"
+                                placeholder="Country"
+                                value={photoMetadata[photo.id]?.country || ''}
+                                onChange={(e) => updateMetadata(photo.id, 'country', e.target.value)}
+                                className="border p-2 mb-2 w-full"
+                            />
+                            <input
+                                type="text"
+                                placeholder="City/State"
+                                value={photoMetadata[photo.id]?.state || ''}
+                                onChange={(e) => updateMetadata(photo.id, 'state', e.target.value)}
+                                className="border p-2 mb-2 w-full"
+                            />
+                            <input
+                                type="text"
+                                placeholder="Description"
+                                value={photoMetadata[photo.id]?.description || ''}
+                                onChange={(e) => updateMetadata(photo.id, 'description', e.target.value)}
+                                className="border p-2 mb-2 w-full"
+                            />
+                            <input
+                                type="text"
+                                placeholder="Taken By"
+                                value={photoMetadata[photo.id]?.takenBy || ''}
+                                onChange={(e) => updateMetadata(photo.id, 'takenBy', e.target.value)}
+                                className="border p-2 mb-2 w-full"
+                            />
+                        </div>
 
                     </div>
+
                 )
             })}
+            <button className='disabled:hidden btn-primary'
+                disabled={!sessionId}
+                onClick={uploadPhotos}
+            >Upload</button>
         </div>
     )
 }

@@ -54,3 +54,18 @@ h4{
   cursor: pointer;
   opacity: 80%;
 }
+
+input{
+  border: black 1px solid;
+  width: 200px;
+}
+
+input:focus{
+  border: black 2px solid;
+}
+
+select{
+  border: black 1px solid;
+  width: 200px;
+  height: 40px;
+}
