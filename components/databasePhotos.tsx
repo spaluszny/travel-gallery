@@ -16,7 +16,7 @@ interface DataBasePhotoProps {
 export default async function DatabasePhotos({
     continent,
     limit,
-    orderBy = 'default'
+    orderBy = 'recent'
 }: DataBasePhotoProps) {
 
     let query = supabase

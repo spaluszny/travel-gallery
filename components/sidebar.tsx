@@ -28,15 +28,15 @@ export default function SideBar() {
                 <div className="absolute bottom-10 right-10">
                     <div className="flex gap-5">
                         <Link href={`mailto:${siteConfig.links.email}`} target="blank" rel="noreferrer">
-                            <Icons.email className="h-6 w-6" />
+                            <Icons.email className="h-6 w-6 transform transition duration-300 hover:scale-120" />
                             <span className="sr-only">Email</span>
                         </Link>
                         <Link href={siteConfig.links.github} target="blank" rel="noreferrer">
-                            <Icons.gitHub className="h-6 w-6" />
+                            <Icons.gitHub className="h-6 w-6 transform transition duration-300 hover:scale-120" />
                             <span className="sr-only">Github</span>
                         </Link>
                         <Link href={siteConfig.links.website} target="blank" rel="noreferrer">
-                            <Icons.website className="h-6 w-6" />
+                            <Icons.website className="h-6 w-6 transform transition duration-300 hover:scale-120" />
                             <span className="sr-only">Personal Website</span>
                         </Link>
                     
