@@ -3,6 +3,8 @@ import { Geist, Geist_Mono, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import SideBar from "@/components/sidebar";
 import Navbar from "@/components/navbar";
+import Login from "@/components/login";
+import LoginDialog from "@/components/loginDialog";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,14 +39,20 @@ export default function RootLayout({
     <html lang="en">
 
       <body className={`${geistSans.variable} ${geistMono.variable} ${interSans.variable} antialiased`}>
-        <Navbar/>
-          {/* Sidebar */}
-          <div className="hidden md:block"><SideBar /></div>
-          
-          {/* Main content area */}
-          <main className="ml-0 md:ml-[400px] min-h-screen">
-            {children}
-          </main>
+        <Navbar />
+        {/* Sidebar */}
+        <div className="hidden md:block">
+          <SideBar />
+        </div>
+        {/* <div className="block md:hidden">
+          <Login>
+            <LoginDialog />
+          </Login>
+        </div> */}
+        {/* Main content area */}
+        <main className="ml-0 md:ml-[400px] min-h-screen">
+          {children}
+        </main>
       </body>
     </html>
   );

@@ -1,13 +1,19 @@
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
 import { Icons } from "./icons"
+import Login from "./login";
+import LoginDialog from "./loginDialog";
 
 
 export default function SideBar() {
     return (
 
-        <div className="h-screen md:w-100 bg-[#F5F5F5] p-10 md:fixed">
-            <div className="">
+        <div className="h-screen md:w-100 bg-[#F5F5F5]  md:fixed">
+                <Login>
+                    <LoginDialog />
+                </Login>
+            <div className="px-10">
+
 
                 <div>
                     <h2 className="">Sarah Paluszny</h2>
@@ -39,7 +45,7 @@ export default function SideBar() {
                             <Icons.website className="h-6 w-6 transform transition duration-300 hover:scale-120" />
                             <span className="sr-only">Personal Website</span>
                         </Link>
-                    
+
                     </div>
                 </div>
             </div>
