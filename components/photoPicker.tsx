@@ -3,6 +3,7 @@
 "use client"
 
 import { useState } from 'react'
+import Image from 'next/image'
 
 interface PhotoMetadata {
     continent?: string
@@ -222,14 +223,7 @@ export default function PhotoPicker() {
                         />
                         {/* <p className="text-sm">{photo.mediaFile.filename}</p> */}
                         <div className='flex flex-col pt-5 gap-5'>
-                            {/* <input
-                                type="text"
-                                placeholder="Continent"
-                                value={photoMetadata[photo.id]?.continent || ''}
-                                onChange={(e) => updateMetadata(photo.id, 'continent', e.target.value)}
-                                className="border p-2 mb-2 w-full"
-                                required
-                            /> */}
+
                             <select id="options" value={photoMetadata[photo.id]?.continent || ''} onChange={(e) => updateMetadata(photo.id, 'continent', e.target.value)}>
                                 <option value="">--Continent--</option>
                                 <option value="Asia">Asia</option>
@@ -275,8 +269,14 @@ export default function PhotoPicker() {
             })}
             <button className='disabled:hidden btn-primary'
                 disabled={!sessionId}
-                onClick={uploadPhotos}
-            >Upload</button>
+                onClick={uploadPhotos}>
+                Upload
+            </button>
+            <Image src="/loading.svg"
+                width={50}
+                height={50}
+                alt='loading icon'
+            />
         </div>
     )
 }

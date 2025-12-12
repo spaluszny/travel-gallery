@@ -24,7 +24,8 @@ export default async function Home() {
             <h2>Welcome, Sarah
             </h2>
             <p>Select the photos you want to add</p>
-            <PhotoPicker/>
+            <div className="flex justify-center"><PhotoPicker/></div>
+            
 
         </div>
     )
