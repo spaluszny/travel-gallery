@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
+// "use client";
 import { createClient } from '@supabase/supabase-js'
+import PhotoModal from './photoModal'
 //import Image from 'next/image'
 
 const supabase = createClient(
@@ -52,31 +54,10 @@ export default async function DatabasePhotos({
     }
 
     return (
-        <div className="columns-1 md:columns-2 2xl:columns-3 gap-4">
-            {photos.map((photo) => (
-                <div key={photo.photo_id} className="mb-4 break-inside-avoid">
-                    <img
-                        src={photo.photo_url}
-                        alt={photo.description || photo.filename}
-                        width={photo.width}
-                        height={photo.height}
-                        className="w-full h-auto"
-                    />
-                </div>
-            ))}
+        <div className="">
+        
+            <PhotoModal photos={photos}/>
         </div>
     )
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

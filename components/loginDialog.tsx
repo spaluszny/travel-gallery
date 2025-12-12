@@ -38,7 +38,7 @@ export default function LoginDialog({ onClose }: { onClose?: () => void }) {
                     />
                 </div>
                 <Link href={authorziationURL}>
-                    <button className="btn-primary">Login To Google</button>
+                    <button className="btn-primary">Sign In</button>
                 </Link>
             </div>
         </div>

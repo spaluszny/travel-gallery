@@ -215,7 +215,7 @@ export default function PhotoPicker() {
                 const imageUrl = `${photo.mediaFile.baseUrl}=w${width}-h${height}`
 
                 return (
-                    <div key={photo.id} className="mb-4 break-inside-avoid pt-5 w-150">
+                    <div key={photo.id} className="mb-4 break-inside-avoid pt-5 w-100">
                         <img
                             src={`/api/proxy-image?url=${encodeURIComponent(imageUrl)}`}
                             alt={photo.mediaFile.filename}
