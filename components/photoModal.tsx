@@ -22,10 +22,18 @@ interface Photo {
 export default function PhotoModal({ photos }: { photos: Photo[] }) {
   useEffect(() => {
     const lightbox = new PhotoSwipeLightbox({
-      gallery: '#gallery',
-      children: 'a',
-      pswpModule: () => import('photoswipe'),
-    })
+  gallery: '#gallery',
+  children: 'a',
+  pswpModule: () => import('photoswipe'),
+  paddingFn: (viewportSize) => {
+    return {
+      top: 30,
+      bottom: viewportSize.x < 700 ? 100 : 150, // Responsive: smaller padding on mobile
+      left: 30,
+      right: 30,
+    }
+  },
+})
     
     // Add caption
     lightbox.on('uiRegister', function () {
