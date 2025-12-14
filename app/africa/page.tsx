@@ -1,5 +1,8 @@
 import DatabasePhotos from "@/components/databasePhotos";
 import AlbumFetcher from "@/components/fetchPhotos";
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 export default function Home() {
 
     return (
