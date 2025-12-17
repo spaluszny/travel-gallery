@@ -11,7 +11,7 @@ const AnimatedHamburger = ({ isOpen, onClick }: { isOpen: boolean; onClick: () =
     return (
         <button
             onClick={onClick}
-            className={`fixed sm:hidden right-4 top-4 cursor-pointer z-20 p-3 rounded-md backdrop-blur-sm transition-all duration-300 ease-out ${isOpen ? 'bg-none' : 'bg-[#F5F5F5]/60'
+            className={`fixed md:hidden right-4 top-4 cursor-pointer z-20 p-3 rounded-md backdrop-blur-sm transition-all duration-300 ease-out ${isOpen ? 'bg-none' : 'bg-[#F5F5F5]/60'
                         }`}
             aria-label={isOpen ? "Close menu" : "Open menu"}
         >

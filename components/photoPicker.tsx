@@ -22,14 +22,14 @@ export default function PhotoPicker() {
     const [photoMetadata, setPhotoMetadata] = useState<Record<string, PhotoMetadata>>({})
     //const [sessionData, setSessionData] = useState()
 
-    const options = [
-        { key: "south-america", value: "South America" },
-        { key: "north-america", value: "North America" },
-        { key: "asia", value: "Aisa" },
-        { key: "africa", value: "Africa" },
-        { key: "europe", value: "Europe" },
-        { key: "oceania", value: "Oceania" },
-    ]
+    // const options = [
+    //     { key: "south-america", value: "South America" },
+    //     { key: "north-america", value: "North America" },
+    //     { key: "asia", value: "Aisa" },
+    //     { key: "africa", value: "Africa" },
+    //     { key: "europe", value: "Europe" },
+    //     { key: "oceania", value: "Oceania" },
+    // ]
     //const photoMetadata = 
     const updateMetadata = (photoId: string, field: string, value: string) => {
         setPhotoMetadata((prev) => ({
@@ -272,11 +272,11 @@ export default function PhotoPicker() {
                 onClick={uploadPhotos}>
                 Upload
             </button>
-            <Image src="/loading.svg"
+            {/* <Image src="/loading.svg"
                 width={50}
                 height={50}
                 alt='loading icon'
-            />
+            /> */}
         </div>
     )
 }

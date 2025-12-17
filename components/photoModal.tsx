@@ -22,19 +22,19 @@ interface Photo {
 export default function PhotoModal({ photos }: { photos: Photo[] }) {
   useEffect(() => {
     const lightbox = new PhotoSwipeLightbox({
-  gallery: '#gallery',
-  children: 'a',
-  pswpModule: () => import('photoswipe'),
-  paddingFn: (viewportSize) => {
-    return {
-      top: 30,
-      bottom: viewportSize.x < 700 ? 100 : 150, // Responsive: smaller padding on mobile
-      left: 30,
-      right: 30,
-    }
-  },
-})
-    
+      gallery: '#gallery',
+      children: 'a',
+      pswpModule: () => import('photoswipe'),
+      paddingFn: (viewportSize) => {
+        return {
+          top: 30,
+          bottom: viewportSize.x < 700 ? 100 : 150, // Responsive: smaller padding on mobile
+          left: 30,
+          right: 30,
+        }
+      },
+    })
+
     // Add caption
     lightbox.on('uiRegister', function () {
       lightbox.pswp?.ui?.registerElement({
@@ -43,17 +43,17 @@ export default function PhotoModal({ photos }: { photos: Photo[] }) {
         isButton: false,
         appendTo: 'root',
         html: '',
-        onInit: (el, pswp) => {
+        onInit: (el) => {
           lightbox.pswp?.on('change', () => {
             const currSlideElement = lightbox.pswp?.currSlide?.data.element
             let captionHTML = ''
-            
+
             if (currSlideElement) {
               const description = currSlideElement.dataset.pswpDescription
               const location = currSlideElement.dataset.pswpLocation
               const camera = currSlideElement.dataset.pswpCamera
               const takenBy = currSlideElement.dataset.pswpTakenBy
-              
+
               if (description) {
                 captionHTML += `<div class="pswp__custom-caption__description">${description}</div>`
               }
@@ -67,20 +67,20 @@ export default function PhotoModal({ photos }: { photos: Photo[] }) {
                 captionHTML += `<div class="pswp__custom-caption__taken-by">By ${takenBy}</div>`
               }
             }
-            
+
             el.innerHTML = captionHTML
           })
         }
       })
     })
-    
+
     lightbox.init()
-    
+
     return () => {
       lightbox.destroy()
     }
   }, [])
-  
+
   return (
     <>
       <style jsx global>{`
@@ -106,12 +106,12 @@ export default function PhotoModal({ photos }: { photos: Photo[] }) {
           margin-top: 4px;
         }
       `}</style>
-      
-      <div id="gallery" className="columns-1 md:columns-2 2xl:columns-3 gap-4">
+
+      <div id="gallery" className="columns-2 2xl:columns-3 gap-4">
         {photos.map((photo) => {
           const location = [photo.state, photo.country].filter(Boolean).join(', ')
           const camera = [photo.camera_make, photo.camera_model].filter(Boolean).join(' ')
-          
+
           return (
             <a
               key={photo.photo_id}
@@ -132,6 +132,7 @@ export default function PhotoModal({ photos }: { photos: Photo[] }) {
                 width={photo.width}
                 height={photo.height}
                 className="w-full h-auto"
+                
               />
             </a>
           )
