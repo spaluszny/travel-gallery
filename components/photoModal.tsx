@@ -4,9 +4,11 @@ import Image from 'next/image'
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import 'photoswipe/style.css'
 import { useEffect } from 'react'
+import { format } from 'date-fns'
 
 interface Photo {
   photo_id: number
+  photo_date: Date
   photo_url: string
   width: number
   height: number
@@ -53,12 +55,16 @@ export default function PhotoModal({ photos }: { photos: Photo[] }) {
               const location = currSlideElement.dataset.pswpLocation
               const camera = currSlideElement.dataset.pswpCamera
               const takenBy = currSlideElement.dataset.pswpTakenBy
+              const date = currSlideElement.dataset.pswpDate
 
               if (description) {
                 captionHTML += `<div class="pswp__custom-caption__description">${description}</div>`
               }
               if (location) {
                 captionHTML += `<div class="pswp__custom-caption__location">📍 ${location}</div>`
+              }
+              if (date) {
+                captionHTML += `<div class="pswp__custom-caption__taken-by">📅 ${format(date, 'MM-dd-yyyy')}</div>`
               }
               if (camera) {
                 captionHTML += `<div class="pswp__custom-caption__camera">📷 ${camera}</div>`
@@ -122,6 +128,7 @@ export default function PhotoModal({ photos }: { photos: Photo[] }) {
               data-pswp-location={location}
               data-pswp-camera={camera}
               data-pswp-taken-by={photo.taken_by}
+              data-pswp-date={photo.photo_date}
               target="_blank"
               rel="noreferrer"
               className="mb-4 break-inside-avoid block"
@@ -132,7 +139,7 @@ export default function PhotoModal({ photos }: { photos: Photo[] }) {
                 width={photo.width}
                 height={photo.height}
                 className="w-full h-auto"
-                
+
               />
             </a>
           )
