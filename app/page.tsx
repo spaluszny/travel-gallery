@@ -1,6 +1,6 @@
 //import Image from "next/image";
 import SideBar from "@/components/sidebar";
-import AlbumFetcher from "@/components/fetchPhotos";
+//import AlbumFetcher from "@/components/fetchPhotos";
 import DatabasePhotos from "@/components/databasePhotos";
 import Newsletter from "@/components/newsletter";
 export const dynamic = 'force-dynamic'

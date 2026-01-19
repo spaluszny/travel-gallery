@@ -79,7 +79,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className='text-white font-sans text-5xl font-semibold'>
+        <nav className='text-white font-sans text-4xl md:text-5xl font-semibold'>
 
 
             {/* Animated Hamburger Button */}

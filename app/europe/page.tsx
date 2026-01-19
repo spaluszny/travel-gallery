@@ -6,7 +6,7 @@ export default function Home() {
 
     return (
         <div className="p-10">
-            <h2 className="pb-10">Europe</h2>
+            <h2 className="pb-10">EUROPE</h2>
             <DatabasePhotos continent="Europe" />
             <Newsletter/>
         </div>

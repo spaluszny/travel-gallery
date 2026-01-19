@@ -18,7 +18,7 @@ export default function SideBar() {
                 <div>
                     <h2 className="">Sarah Paluszny</h2>
                     <h3 className="-mt-2">Travel Photography</h3>
-                    <p className="pt-5">This is a collection of photographs, I’ve attained while traveling the world. Some are taken by me. Some are taken by friends I’ve met along the way. Hope you enjoy :)</p>
+                    <p className="pt-5">This is a curated collection of photographs obtained during my travels around the world. Most of the images were taken by me; some were taken by friends I have met along the way. I hope you enjoy :&#41;</p>
                 </div>
                 <div className="pt-10 text-lg font-semibold uppercase"><Link href="/">Recent</Link></div>
                 <div className="pt-10">
