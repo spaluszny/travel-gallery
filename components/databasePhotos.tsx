@@ -55,7 +55,6 @@ export default async function DatabasePhotos({
 
     return (
         <div className="">
-        
             <PhotoModal photos={photos}/>
         </div>
     )

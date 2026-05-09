@@ -2,12 +2,11 @@
 import axios from "axios"
 import Image from "next/image"
 
-export default async function AlbumFetcher({ linkURL }: { linkURL: string }) {
-  const response = await axios.get(linkURL)
+export default async function GooglePhotosAlbumFetcher({ URL }: { URL: string }) {
+  const response = await axios.get(URL)
   
   const regex = /\["(https:\/\/lh3\.googleusercontent\.com\/pw\/[a-zA-Z0-9\-_]+)"/g
 
-  
   const responseText = typeof response.data === 'string' 
     ? response.data 
     : JSON.stringify(response.data)

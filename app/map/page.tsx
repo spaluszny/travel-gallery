@@ -1,27 +1,17 @@
-import Image from "next/image"
+import { createClient } from '@supabase/supabase-js'
+import Map from "@/components/map"
 
-export default function Home() {
-    const londonX = 151.5
-    const londonY = 127
+const supabase = createClient(
+  process.env.SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+)
 
-    return (
-        <div className="flex min-h-screen items-center justify-center">
-            <div className="relative border-2">
-                <Image
-                    src="/world-map.png"
-                    alt="world map"
-                    width={1000}
-                    height={500}
-                    className="max-w-full h-auto"
-                />
+export default async function MapPage() {
+  const { data: locations, error } = await supabase
+    .from('unique_travel_locations')
+    .select('state, country, continent, lat, lng')
 
-                <span
-                    className="absolute text-xl"
-                    style={{
-                        left: `${londonX}px`,
-                        top: `${londonY}px`,
-                    }}>📍</span>
-            </div>
-        </div>
-    )
+  if (error) console.error(error)
+
+  return <Map locations={locations ?? []} />
 }

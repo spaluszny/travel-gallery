@@ -14,7 +14,7 @@ export default function Home() {
       </div>
       <div className=" p-5 md:p-10">
         <h2>RECENT</h2>
-        <p className="sm:w-3/5 pb-5">Photos from my most recent adventure. I had the amazing opportunity to complete the Manaslu Circuit in Nepal. </p>
+        <p className="sm:w-3/5 pb-5">Photos from my most recent adventure. I had the amazing opportunity to travel through Malaysia and Indonesia. More photos coming soon :)</p>
         <DatabasePhotos limit={10} />
       </div>
       <Newsletter />
