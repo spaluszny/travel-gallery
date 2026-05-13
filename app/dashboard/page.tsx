@@ -4,12 +4,13 @@ import { cookies } from "next/headers"
 // import { google } from "googleapis"
 import PhotoPicker from "@/components/photoPicker"
 import Link from "next/link"
+import PhotoDashboardTable from "@/components/photoDashboard"
 
 export default async function Home() {
-    const cookieStore = cookies()
-    const accessToken = (await cookieStore).get("google_access_token")?.value
+  const cookieStore = cookies()
+  const accessToken = (await cookieStore).get("google_access_token")?.value
 
-    if (!accessToken) {
+  if (!accessToken) {
     return (
       <div className="p-10">
         <h2>Not logged in</h2>
@@ -19,14 +20,17 @@ export default async function Home() {
     )
   }
 
-    return (
-        <div className="p-10">
-            <h2>Welcome, Sarah
-            </h2>
-            <p>Select the photos you want to add</p>
-            <div className="flex justify-center"><PhotoPicker/></div>
-            
+  return (
+    <div className="p-10">
+      <h2>Welcome, Sarah
+      </h2>
+      <div className="flex justify-between items-center h-20">
+        <p className="m-0 w-125">You look so cute. Good job at uploading photos! So proud of you for keeping up with this :)</p>
+        <PhotoPicker />
+      </div>
 
-        </div>
-    )
+      <PhotoDashboardTable />
+
+    </div>
+  )
 }

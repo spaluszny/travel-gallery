@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter_Tight } from "next/font/google";
+import { Geist, Geist_Mono, Inter_Tight, Inter } from "next/font/google";
 import SideBar from "@/components/sidebar";
 import Navbar from "@/components/navbar";
 import "./globals.css";
 
+
+const inter = Inter({
+  subsets:['latin'],
+  variable:'--font-sans'
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en">
 
-      <body className={`${geistSans.variable} ${geistMono.variable} ${interSans.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${interSans.variable} ${inter.variable} antialiased`}>
         <Navbar/>
           <div className="hidden md:block"><SideBar /></div>
           
