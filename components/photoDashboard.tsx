@@ -9,6 +9,7 @@ import Image from "next/image";
 type Photo = {
   photo_id: number;
   photo_url: string;
+  s3_key: string; 
   continent: string | null;
   country: string | null;
   state: string | null;
